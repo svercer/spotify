@@ -2,13 +2,12 @@ import React from "react";
 import Layout from "../components/Layout";
 
 
-
-const CategoryPlaylist = () => {
+const FeaturedPlaylist = () => {
   return (
     <Layout auth={true}>
-      Category Playlist
+      Featured Playlist
     </Layout>
   )
 }
 
-export default CategoryPlaylist
+export default FeaturedPlaylist
