@@ -1,9 +1,16 @@
 import React from "react";
-import {Link} from "react-router-dom";
-
+import {Link, Navigate} from "react-router-dom";
 
 const Layout = ({auth, children}) => {
   console.log('auth', auth)
+  if (!auth){
+    return (
+      <Navigate push to={{
+          pathname: '/'
+        }}
+      />
+    )
+  }
   return (
     <div className='bg-red-300'>
       <nav>
