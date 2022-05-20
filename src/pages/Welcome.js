@@ -1,8 +1,7 @@
 import React from "react";
 import {auth} from "../auth";
-import {Navigate, useSearchParams, useLocation} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 import {Spotify} from "../components/icons/spotify";
-import Axios from "axios";
 
 const Welcome = () => {
 
@@ -17,15 +16,6 @@ const Welcome = () => {
   const RESPONSE_TYPE='token'
   const REDIRECT_URI='http://localhost:3000'
   const END_POINT='https://accounts.spotify.com/authorize'
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    try {
-      const res = await Axios.get(`${END_POINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`)
-      console.log('res', res)
-    } catch (error){
-      console.log('error', error)
-    }
-  }
 
   if (!auth()){
     return (
@@ -37,11 +27,8 @@ const Welcome = () => {
               Sign in to your Spotify Account
             </h2>
           </div>
-          {/*<form className="mt-8 space-y-6" action="#" method="POST">*/}
             <div>
               <a
-                // type="button"
-                // onClick={(e) => handleLogin(e)}
                 className="group relative w-full
                 flex justify-center py-2 px-4 border border-transparent text-sm font-medium
                 rounded-md text-white bg-green-600 hover:bg-indigo-700 focus:outline-none
@@ -53,17 +40,13 @@ const Welcome = () => {
                   </span>
                 Sign in
               </a>
-              <a
-                href={`${END_POINT}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-              >code</a>
             </div>
-          {/*</form>*/}
         </div>
       </div>
     )
   }
   return <Navigate push to={{
-     pathname: 'featured-playlist'
+     pathname: '/featured-playlist'
     }}/>
 
 }

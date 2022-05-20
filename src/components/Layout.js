@@ -1,9 +1,20 @@
-import React from "react";
-import {Link, Navigate} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Navigate, useNavigate} from "react-router-dom";
+import {auth} from "../auth";
+import Navigation from "./Navigation";
 
-const Layout = ({auth, children}) => {
-  console.log('auth', auth)
-  if (!auth){
+
+
+
+const Layout = ({children}) => {
+  const navigate = useNavigate();
+  const logOut = (e) => {
+    e.preventDefault()
+    localStorage.clear();
+    navigate('/')
+  }
+
+  if (!auth()){
     return (
       <Navigate push to={{
           pathname: '/'
@@ -12,12 +23,8 @@ const Layout = ({auth, children}) => {
     )
   }
   return (
-    <div className='bg-red-300'>
-      <nav>
-        <Link className='mr-3' to="/new-releases">New Releases</Link>
-        <Link className='mr-3' to="/featured-playlist">Featured</Link>
-        <Link className='mr-3' to="/category-playlist">Category</Link>
-      </nav>
+    <div className='bg-black'>
+      <Navigation logOut={logOut} />
       {children}
     </div>
   )

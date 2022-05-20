@@ -1,8 +1,7 @@
-import React from 'react'
 import Axios from "axios";
 
 Axios.defaults.baseURL = 'https://api.spotify.com/v1/browse';
-Axios.defaults.headers.common['Authorization'] = `Authorization ${localStorage.getItem('token')}`;
+Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
 export const getNewReleases = async (inputLimit = null) => {
   try {
@@ -10,32 +9,37 @@ export const getNewReleases = async (inputLimit = null) => {
       params: {
         country: 'ES',
         limit: inputLimit ?? 10
+      }, headers: {
+        'Authorization' : `Bearer ${localStorage.getItem('token')}`
       }
     })
-    return res.albums.items
+    return res.data.albums.items
   } catch (e) {
     console.log(e)
   }
 }
 
-export const featuredPlaylist = async (inputLimit = null) => {
+export const getFeaturedPlaylist = async (inputLimit = null) => {
   let date = new Date()
   try {
     const res = await Axios.get('/featured-playlists', {
       params: {
         country: 'SE',
         locale: 'SE',
-        limit: inputLimit ?? 10,
+        limit: 10,
         timestamp: date.toISOString()
+      },
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     })
-    return res.playlists.items
+    return res.data.playlists.items
   } catch (e) {
     console.log(e)
   }
 }
 
-export const browseGenres = async (category_id, inputLimit) => {
+export const getBrowseGenres = async (category_id, inputLimit) => {
   //default category_id = rock
   try {
     const res = await Axios.get(`/categories/${category_id}/playlists`, {
@@ -44,8 +48,9 @@ export const browseGenres = async (category_id, inputLimit) => {
         limit: inputLimit ?? 10
       }
     })
-    return res.playlists.items
-  } catch (e) {
-    console.log(e)
+    return res.data.playlists.items
+  } catch (error) {
+    console.log(error.response)
+    return error.response
   }
 }
