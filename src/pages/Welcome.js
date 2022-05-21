@@ -16,6 +16,7 @@ const Welcome = () => {
   const RESPONSE_TYPE='token'
   const REDIRECT_URI=process.env.REACT_APP_SPOTIFY_REDIRECT_URL
   const END_POINT='https://accounts.spotify.com/authorize'
+  
 
   if (!auth()){
     return (
