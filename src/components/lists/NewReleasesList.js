@@ -37,7 +37,7 @@ const NewReleasesList = ({ newReleases }) => {
               <tbody>
                 {newReleases.length > 0 &&
                   newReleases.map((list) => {
-                    console.log(list);
+
                     return (
                       <tr key={list.id}>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

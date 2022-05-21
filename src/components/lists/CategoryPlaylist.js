@@ -1,6 +1,6 @@
 import React from "react";
 
-const FeaturesList = ({ featuredList }) => {
+const CategoryPlaylist = ({ categoryPlaylist }) => {
   return (
     
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -29,8 +29,8 @@ const FeaturesList = ({ featuredList }) => {
                 </tr>
               </thead>
               <tbody>
-                {featuredList.length > 0 &&
-                  featuredList.map((list) => {
+                {categoryPlaylist.length > 0 &&
+                  categoryPlaylist.map((list) => {
                     return (
                       <tr key={list.id}>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -62,7 +62,9 @@ const FeaturesList = ({ featuredList }) => {
                               aria-hidden="true"
                               className="absolute inset-0 bg-green-700 opacity-50 rounded-full"
                             ></span>
-                            <a className="relative p-3 w-40" target='_blank' href={list.external_urls.spotify}>View on spotify</a>
+                            <a className="relative p-3 w-60" target='_blank' href={list.external_urls.spotify}>
+                              View
+                            </a>
                           </div>
                         </td>
                       </tr>
@@ -76,4 +78,4 @@ const FeaturesList = ({ featuredList }) => {
   );
 };
 
-export default FeaturesList;
+export default CategoryPlaylist;

@@ -4,7 +4,7 @@ import { auth } from "../auth";
 import { getFeaturedPlaylist } from "../api/spotify";
 import FeaturedList from "../components/lists/FeaturesList";
 
-const FeaturedPlaylist = () => {
+const Featured = () => {
   const [featuredPlaylist, setFeaturedPlaylist] = useState({});
   useEffect(() => {
     try {
@@ -24,4 +24,4 @@ const FeaturedPlaylist = () => {
   );
 };
 
-export default FeaturedPlaylist;
+export default Featured;

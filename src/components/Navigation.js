@@ -1,14 +1,10 @@
 import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import {Link, Navigate, Redirect} from "react-router-dom";
+import {Link, Navigate, Redirect, useLocation} from "react-router-dom";
 import {Spotify} from "./icons/spotify";
 
-const navigation = [
-  { name: 'New Releases', href: '/new-releases', current: true },
-  { name: 'Featured Playlists', href: '/featured-playlist', current: false },
-  { name: 'Categories', href: '/category-playlist', current: false }
-]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -16,6 +12,12 @@ function classNames(...classes) {
 
 export default function Navigation({logOut}) {
 
+  const location = useLocation()
+  const navigation = [
+    { name: 'New Releases', href: '/new-releases', current: false },
+    { name: 'Featured Playlists', href: '/featured-playlist', current: true },
+    { name: 'Categories', href: '/category-playlist', current: false }
+  ]
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({open}) => (
@@ -34,17 +36,21 @@ export default function Navigation({logOut}) {
                   )}
                 </Disclosure.Button>
               </div>
+              <div className='w-30 h-14 p-2 bg-white  hidden md:inline-flex'>
+                <Spotify />                
+              </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
-                  <Spotify />
+
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => {
-                      return (
-                        <Link key={item.name} className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium' to={item.href}>{item.name}</Link>
+                    {navigation.map((item) => (
+                        <Link key={item.name} 
+                          className={`${location.pathname === item.href && 'bg-gray-700'}   text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`} 
+                          to={item.href}>{item.name}</Link>
                       )
-                    })}
+                    )}
                   </div>
                 </div>
               </div>
