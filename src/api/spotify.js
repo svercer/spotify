@@ -16,6 +16,7 @@ export const getNewReleases = async (inputLimit = null) => {
     return res.data.albums.items
   } catch (e) {
     console.log(e)
+    return e.response
   }
 }
 
@@ -35,7 +36,8 @@ export const getFeaturedPlaylist = async (inputLimit = null) => {
     })
     return res.data.playlists.items
   } catch (e) {
-    console.log(e)
+    console.log(e.response)
+    return e.response
   }
 }
 
