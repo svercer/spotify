@@ -1,77 +1,76 @@
-import React, { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import {Link, Navigate, Redirect, useLocation} from "react-router-dom";
-import {Spotify} from "./icons/spotify";
-
-
+import React, { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Link, Navigate, Redirect, useLocation } from "react-router-dom";
+import { Spotify } from "./icons/spotify";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-export default function Navigation({logOut}) {
-
-  const location = useLocation()
+export default function Navigation({ logOut }) {
+  const location = useLocation();
   const navigation = [
-    { name: 'New Releases', href: '/new-releases', current: false },
-    { name: 'Featured Playlists', href: '/featured-playlist', current: true },
-    { name: 'Categories', href: '/category-playlist', current: false }
-  ]
+    { name: "New Releases", href: "/new-releases", current: false },
+    { name: "Featured Playlists", href: "/featured-playlist", current: true },
+    { name: "Categories", href: "/category-playlist", current: false },
+  ];
   return (
     <Disclosure as="nav" className="bg-gray-800">
-      {({open}) => (
+      {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true"/>
+                    <XIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true"/>
+                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
-              <div className='w-30 h-14 p-2 bg-white  hidden md:inline-flex'>
-                <Spotify />                
+              <div className="w-30 h-14 p-2 bg-white  hidden md:inline-flex">
+                <Link to="/">
+                  <Spotify />
+                </Link>
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
-
-                </div>
+                <div className="flex-shrink-0 flex items-center"></div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                        <Link key={item.name} 
-                          className={`${location.pathname === item.href && 'bg-gray-700'}   text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`} 
-                          to={item.href}>{item.name}</Link>
-                      )
-                    )}
+                      <Link
+                        key={item.name}
+                        className={`${
+                          location.pathname === item.href && "bg-gray-700"
+                        }   text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        to={item.href}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>
-              <div
-                className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
-                  {localStorage.getItem('display_name')}
+                  {localStorage.getItem("display_name")}
                 </button>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button
-                      className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={localStorage.getItem('profile_image')}
+                        src={localStorage.getItem("profile_image")}
                         alt=""
                       />
                     </Menu.Button>
@@ -85,12 +84,14 @@ export default function Navigation({logOut}) {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items
-                      className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
-                        {({active}) => (
+                        {({ active }) => (
                           <a
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                             onClick={(e) => logOut(e)}
                           >
                             Sign out
@@ -112,10 +113,12 @@ export default function Navigation({logOut}) {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -125,5 +128,5 @@ export default function Navigation({logOut}) {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
