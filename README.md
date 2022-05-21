@@ -4,7 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Run Project Locally 
 
-As there are client information inside the project and Spotify App being created for developers url to run locally must remain default 
+## Clone the project from the repository
+
+### Run command 
+
+`npm install`
+
+As there are client information inside the project, and Spotify App being created for developers, url to run locally must remain default. 
 
 ### `http://localhost:3000`
 

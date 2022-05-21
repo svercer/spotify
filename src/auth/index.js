@@ -29,3 +29,13 @@ export const getProfile = async (token) => {
     }
   }
 }
+
+export const extractToken = (location) => {
+  const params = new URLSearchParams(location.hash);
+  const valuesString = JSON.stringify([...params.values()])
+  const arrValues = JSON.parse(valuesString)
+  const token = arrValues[0]
+  if (token){
+    localStorage.setItem('token', token)
+  }
+}
