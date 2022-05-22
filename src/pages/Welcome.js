@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {auth, extractToken} from "../auth";
 import {Navigate, useLocation} from "react-router-dom";
 import {Spotify} from "../components/icons/spotify";
